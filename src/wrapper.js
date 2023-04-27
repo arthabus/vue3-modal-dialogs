@@ -1,9 +1,11 @@
 'use strict'
 
+import {h} from 'vue'
+
 import {
   noop,
-  CLOSE_EVENT,
-  ERROR_EVENT,
+  CLOSE_EVENT_VUE3,
+  ERROR_EVENT_VUE3,
   collectProps,
   transitionGroupProps
 } from './utils'
@@ -48,12 +50,12 @@ export default {
   beforeDestroy () {
     wrappers[this.name] = undefined
   },
-  render (createElement) {
-    const on = { ...this.$listeners }
+  render () {
+    const on = { ...this.$attrs } //optimization - filter only "onXxx.." properties
 
     // Modify the 'after-leave' event for the transition promise
-    const afterLeave = on['after-leave'] || noop
-    on['after-leave'] = el => {
+    const afterLeave = on['onAfter-leave'] || noop
+    on['onAfter-leave'] = el => {
       el.$afterLeave()
       afterLeave(el)
     }
@@ -67,18 +69,18 @@ export default {
       const data = this.dialogs[dialogId]
 
       const on = {}
-      on[CLOSE_EVENT] = data.close
-      on[ERROR_EVENT] = data.error
+      on[CLOSE_EVENT_VUE3] = data.close
+      on[ERROR_EVENT_VUE3] = data.error
 
-      return createElement(data.component, {
-        on,
+      return h(data.component, {
+        ...on,
         key: data.id,
         props: data.propsData
       })
     })
 
     // Render the wrapper as transition-group
-    return createElement('transition-group', { on, props }, children)
+    return h('transition-group', { on, props }, children)
   },
   methods: {
     /**
@@ -115,7 +117,7 @@ export default {
         const renderOptions = Object.freeze({ id, propsData, component, close, error })
 
         // Finally render the dialog component
-        this.$set(this.dialogs, id, renderOptions)
+        this.dialogs[id] = renderOptions
 
         return dataPromise
       })
@@ -130,7 +132,7 @@ export default {
 
     /** Remove a dialog component from the wrapper */
     remove (id) {
-      this.$delete(this.dialogs, id)
+      delete this.dialogs[id]
     }
   }
 }

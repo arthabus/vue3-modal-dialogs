@@ -4,6 +4,8 @@
 
 # Introduction
 
+Port of [vue-modal-dialogs](https://github.com/hjkcai/vue-modal-dialogs) to Vue 3
+
 **Promisify dialogs!**
 
 A typical and essential type of user interaction is dialogs. Dialogs are somehow similar to Promise. A dialog will eventually close. A Promise will eventually resolve. A dialog returns some data when it closes. So does Promise. It is time to put them together.

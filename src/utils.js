@@ -2,6 +2,8 @@
 
 export function noop () { /* nothing */ }
 
+export const CLOSE_EVENT_VUE3 = 'onVue-modal-dialogs:close'
+export const ERROR_EVENT_VUE3 = 'onVue-modal-dialogs:error'
 export const CLOSE_EVENT = 'vue-modal-dialogs:close'
 export const ERROR_EVENT = 'vue-modal-dialogs:error'
 

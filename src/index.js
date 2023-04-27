@@ -1,13 +1,11 @@
 'use strict'
 
-import Vue from 'vue'
 import { create } from './create'
 import DialogsWrapper from './wrapper'
 
 export {
   create,
-  DialogsWrapper,
-  Vue as DialogComponent
+  DialogsWrapper
 }
 
 /** vue-modal-dialogs plugin installer */
