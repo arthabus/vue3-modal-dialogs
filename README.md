@@ -20,17 +20,19 @@ Install via [npm](https://npmjs.com) or [yarn](https://yarnpkg.com)
 
 ```bash
 # Use npm
-npm install vue-modal-dialogs --save
+npm install vue3-modal-dialogs --save
 
 # Use yarn
-yarn add vue-modal-dialogs
+yarn add vue3-modal-dialogs
 ```
 
-Then import and install vue-modal-dialogs as a Vue plugin:
+Then import and install vue3-modal-dialogs as a Vue plugin:
 
 ```javascript
-import * as ModalDialogs from 'vue-modal-dialogs'
-Vue.use(ModalDialogs)               // No options
+import * as ModalDialogs from 'vue3-modal-dialogs'
+import {createApp} from 'vue'
+let app = createApp({})
+app.use(ModalDialogs)               // No options
 ```
 
 # Guide & Demo
@@ -181,8 +183,8 @@ dialog outside.
 
 # Integrate with TypeScript
 
-vue-modal-dialogs have *partial* support for TypeScript.
-Vue.js 2.5 or above is *required* if you are using TypeScript.
+vue3-modal-dialogs have *partial* support for TypeScript.
+Vue.js 3.0 or above is *required* if you are using TypeScript.
 
 ## ModalDialogs.create
 
@@ -220,7 +222,8 @@ TypeScript can infer this generic argument in `ModalDialogs.create`.
 
 ```tsx
 import { Prop, Component } from 'vue-property-decorator'
-import { create, DialogComponent } from 'vue-modal-dialogs'
+import { create, DialogComponent } from 'vue3-modal-dialogs'
+import {h} from 'vue'
 
 @Component
 export default class SomeComponent extends DialogComponent<boolean> {
@@ -231,8 +234,9 @@ export default class SomeComponent extends DialogComponent<boolean> {
     this.$close(true)
   }
 
-  render (h) {
+  render () {
     // ...
+    // return h(...)
   }
 }
 
@@ -246,7 +250,7 @@ create<ConfirmData>(SomeComponent)
 
 ## from 2.x
 
-1. Instead of using the default export (`import ModalDialogs from "vue-modal-dialogs";`) with `Vue.use` use the import all syntax (`import * as ModalDialogs from "vue-modal-dialogs";`)
+1. Instead of using the default export (`import ModalDialogs from "vue-modal-dialogs";`) with `Vue.use` use the import all syntax (`import * as ModalDialogs from "vue3-modal-dialogs";`)
 2. `makeDialog` is renamed to `create`.
 3. The `dialogId` property is removed and kept internally. You might need to
     find another way to implement your requirement without `dialogId`.
@@ -257,7 +261,7 @@ Here are two major breaking changes:
 
 1. An HTML element is inserted into the DOM automatically in 1.x.
     Then I create a new root Vue instance on it. This causes critical problem
-    when using vue-modal-dialogs with vuex, vue-i18n, etc.
+    when using vue3-modal-dialogs with vuex, vue-i18n, etc.
 
     Remove all options in `Vue.use(ModalDialogs, ...)` and
     add a `<dialogs-wrapper>` component into the root component, typically `App.vue`,
