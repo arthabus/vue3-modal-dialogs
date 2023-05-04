@@ -96,5 +96,6 @@ export function filterUndefinedProps (props, component) {
     }
   }
 
-  return props.filter(key => !propKeys[key])
+  let res = props.filter(key => !propKeys[key])
+  return res
 }

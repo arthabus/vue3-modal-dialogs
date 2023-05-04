@@ -75,12 +75,12 @@ export default {
       return h(data.component, {
         ...on,
         key: data.id,
-        props: data.propsData
+        ...data.propsData
       })
     })
 
     // Render the wrapper as transition-group
-    return h('transition-group', { on, props }, children)
+    return h('transition-group', { ...on, ...props }, children)
   },
   methods: {
     /**
