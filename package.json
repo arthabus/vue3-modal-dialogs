@@ -1,6 +1,6 @@
 {
   "name": "vue3-modal-dialogs",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "description": "Promisify dialogs in Vue.js",
   "main": "dist/vue3-modal-dialogs.cjs.js",
   "module": "dist/vue3-modal-dialogs.esm.js",

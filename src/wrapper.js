@@ -47,7 +47,7 @@ export default {
     // Expose wrapper component
     wrappers[this.name] = this
   },
-  beforeDestroy () {
+  beforeUnmount () {
     wrappers[this.name] = undefined
   },
   render () {
